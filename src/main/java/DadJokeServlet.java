@@ -16,11 +16,9 @@ public class DadJokeServlet extends HttpServlet {
         String joke = request.getParameter("joke");
 
         if(joke == null) {
-
             joke = "hungry";
         }
 
         out.println("<h1>Hi " + joke + ", I'm Dad!</h1>");
     }
-
 }
