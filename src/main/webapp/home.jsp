@@ -14,6 +14,19 @@
     <title>Title</title>
 </head>
 <body>
-    <h1>Hello, <%=firstname%> <%=lastname%></h1>
+    <h1>Hello, <%=firstname + " " + lastname%></h1>
+    <%@include file="partials/aboutme.jsp"%>
+    <h3>What would you like to do?</h3>
+    <h3>View Profile</h3>
+
+    <form action="/profile.jsp" method="get">
+        <button>Go to profile</button>
+    </form>
+
+    <h3>Write a To Do list!</h3>
+    <form action="/todo.jsp" method="post">
+        <input type="text" id="item" name="item">
+        <button>Add To List</button>
+    </form>
 </body>
 </html>
