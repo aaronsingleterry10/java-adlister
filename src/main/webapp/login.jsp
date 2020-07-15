@@ -22,6 +22,7 @@
 </head>
 <body>
 <h1>Welcome to the Site!</h1>
+<%@include file="partials/header.jsp"%>
 <h3>Please login:</h3>
 <form action="login.jsp" method="post">
     <label for="username">username:</label>
@@ -30,13 +31,6 @@
     <input type="password" id="password" name="password">
     <button>Submit</button>
 </form>
-<%--<c:choose>--%>
-<%--    <c:when test="${param.username.equals('username')}">--%>
-<%--        <%response.sendRedirect("/profile.jsp");%>--%>
-<%--    </c:when>--%>
-<%--    <c:otherwise>--%>
-<%--        <% response.sendRedirect("/login.jsp");%>--%>
-<%--    </c:otherwise>--%>
-<%--</c:choose>--%>
+<%@include file="partials/footer.jsp"%>
 </body>
 </html>
