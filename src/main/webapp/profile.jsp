@@ -13,5 +13,7 @@
 </head>
 <body>
 <h1>Welcome to the Admin Profile!</h1>
+<%@include file="partials/header.jsp"%>
+<%@include file="partials/footer.jsp"%>
 </body>
 </html>
