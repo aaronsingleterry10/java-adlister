@@ -11,6 +11,6 @@
     <title>Profile</title>
 </head>
 <body>
-    <h1>This is a profile!</h1>
+    <h1>Hello, <%= request.getParameter("username")%>!</h1>
 </body>
 </html>

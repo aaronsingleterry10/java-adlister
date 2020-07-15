@@ -16,10 +16,12 @@
 <body>
     <h1>Hello, <%=firstname + " " + lastname%></h1>
     <%@include file="partials/aboutme.jsp"%>
+    <%@include file="partials/header.jsp"%>
     <h3>What would you like to do?</h3>
     <h3>View Profile</h3>
 
-    <form action="/profile.jsp" method="get">
+    <form action="/user-profile.jsp" method="get">
+        <input type="hidden" id="username" name="username" value="Aaron">
         <button>Go to profile</button>
     </form>
 
@@ -28,5 +30,6 @@
         <input type="text" id="item" name="item">
         <button>Add To List</button>
     </form>
+    <%@include file="partials/footer.jsp"%>
 </body>
 </html>
