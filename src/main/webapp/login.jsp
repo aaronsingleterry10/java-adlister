@@ -9,7 +9,13 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%--<% request.setAttribute("user", request.getParameter("username"));%>--%>
 <%--<% request.setAttribute("pass", request.getParameter("password"));%>--%>
-
+<%
+    if (request.getMethod().equalsIgnoreCase("post")) {
+        if (request.getParameter("username").equals("admin") && request.getParameter("password").equals("password")) {
+            response.sendRedirect("/profile.jsp");
+        }
+    }
+%>
 <html>
 <head>
     <title>Login Page</title>
@@ -24,13 +30,13 @@
     <input type="password" id="password" name="password">
     <button>Submit</button>
 </form>
-<c:choose>
-    <c:when test="${param.username.equals('username')}">
-        <%response.sendRedirect("/profile.jsp");%>
-    </c:when>
-    <c:otherwise>
-        <% response.sendRedirect("/login.jsp");%>
-    </c:otherwise>
-</c:choose>
+<%--<c:choose>--%>
+<%--    <c:when test="${param.username.equals('username')}">--%>
+<%--        <%response.sendRedirect("/profile.jsp");%>--%>
+<%--    </c:when>--%>
+<%--    <c:otherwise>--%>
+<%--        <% response.sendRedirect("/login.jsp");%>--%>
+<%--    </c:otherwise>--%>
+<%--</c:choose>--%>
 </body>
 </html>
