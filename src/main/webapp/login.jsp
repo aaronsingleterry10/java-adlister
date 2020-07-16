@@ -7,8 +7,7 @@
 --%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%--<% request.setAttribute("user", request.getParameter("username"));%>--%>
-<%--<% request.setAttribute("pass", request.getParameter("password"));%>--%>
+
 <%
     if (request.getMethod().equalsIgnoreCase("post")) {
         if (request.getParameter("username").equals("admin") && request.getParameter("password").equals("password")) {
