@@ -9,6 +9,11 @@
 <html>
 <head>
     <title>Title</title>
+    <style>
+        body {
+            background-color: <%= request.getParameter("color")%>;
+        }
+    </style>
 </head>
 <body>
 
