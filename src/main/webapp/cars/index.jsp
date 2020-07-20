@@ -9,23 +9,26 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
+    <%@include file="/partials/head.jsp"%>
     <title>Cars</title>
 </head>
 <body>
+    <%@include file="/partials/navbarCars.jsp"%>
     <h1>Welcome the Car Lot!</h1>
 
     <div class="container">
         <h3>Here are your cars:</h3>
         <c:forEach var="car" items="${cars}">
-            <h3>Make:</h3>
-            <p>${car.make}</p>
-            <h3>Model:</h3>
-            <p>${car.model}</p>
-            <h3>Year:</h3>
-            <p>${car.year}</p>
+            <div class="col-md-6">
+                <h4>Make:</h4>
+                <p>${car.make}</p>
+                <h4>Model:</h4>
+                <p>${car.model}</p>
+                <h4>Year:</h4>
+                <p>${car.year}</p>
+            </div>
         </c:forEach>
     </div>
-
 
 </body>
 </html>
