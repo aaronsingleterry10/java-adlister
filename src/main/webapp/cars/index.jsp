@@ -29,6 +29,9 @@
             </div>
         </c:forEach>
     </div>
+    <form action="/cars/create.jsp" method="GET">
+        <button>Add Vehicle</button>
+    </form>
 
 </body>
 </html>
