@@ -8,4 +8,13 @@ public class DaoFactory {
         return adsDao;
     }
 
+    private static Cars carsDao;
+
+    public static Cars getCarsDao() {
+        if (carsDao == null) {
+            carsDao = new ListCarsDao();
+        }
+        return carsDao;
+    }
+
 }
