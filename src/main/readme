@@ -1,0 +1,20 @@
+================================= MVC PRACTICE
+In this bonus, you will build out the (C)reate and (R)ead CRUD functionality for cars.
+1. commit all your current work
+2. branch off of the 'mvc-exercise' branch into a new branch called 'mvc-cars'
+3. create the MVC logic for creating and viewing all cars using the Ads as an example
+The Car entity should have the following:
+  id (use a long type)
+  make (use a string type)
+  model (use a string type)
+  year (use an int)
+The following are some of the files you will need to add:
+  ShowCarsServlet
+  CreateCarServlet
+  Car model class
+  Cars interface
+  ListCarsDao
+  You will also need to add a getCarsDao method to the DaoFactory
+  In a new cars directory in WEB-INF of webapp...
+    index.jsp
+    create.jsp
