@@ -14,11 +14,17 @@
 </head>
 <body>
     <%@include file="/partials/navbar.jsp"%>
-    <h1>Your Ads!</h1>
-    
-    <c:forEach var="ad" items="${ads}">
-        <div>${ad.title}</div>
-        <div>${ad.description}</div>
-    </c:forEach>
+    <div class="container">
+        <h1>Your Ads!</h1>
+
+        <c:forEach var="ad" items="${ads}">
+            <div class="col-md-6">
+                <h2>${ad.title}</h2>
+                <p>${ad.description}</p>
+            </div>
+
+        </c:forEach>
+    </div>
+
 </body>
 </html>
