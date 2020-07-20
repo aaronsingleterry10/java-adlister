@@ -14,9 +14,7 @@ public class LoginServlet extends HttpServlet {
             response.sendRedirect("/profile");
             return;
         }
-
         request.getRequestDispatcher("/login.jsp").forward(request, response);
-
     }
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
@@ -24,13 +22,9 @@ public class LoginServlet extends HttpServlet {
         String password = request.getParameter("password");
         boolean validAttempt = username.equals("admin") && password.equals("password");
 
-
-            HttpSession user = request.getSession();
+        HttpSession user = request.getSession();
         if (validAttempt) {
             user.setAttribute("isAdmin", true);
-        }
-
-        if(user.getAttribute("isAdmin").equals(true)) {
             response.sendRedirect("/profile");
         } else {
             response.sendRedirect("/login");
