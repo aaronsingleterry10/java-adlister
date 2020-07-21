@@ -1,1 +1,9 @@
 USE adlister_db;
+
+DROP TABLE IF EXISTS items;
+
+CREATE TABLE items(
+   id INT UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,
+   name VARCHAR(100) NOT NULL,
+   price_in_cents INT NOT NULL
+);
