@@ -10,11 +10,11 @@ import java.sql.SQLException;
 public class StoreServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        req.getRequestDispatcher("/WEB-INF/store/store.jsp");
         try {
             req.setAttribute("items", DaoFactory.getItemsDao().listAll());
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
+        req.getRequestDispatcher("/WEB-INF/store/store.jsp").forward(req, resp);
     }
 }

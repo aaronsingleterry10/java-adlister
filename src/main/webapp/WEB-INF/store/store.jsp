@@ -15,5 +15,22 @@
 <body>
     <%@include file="/WEB-INF/partials/navbar.jsp"%>
     <h1>Welcome To Waldo Martinez!</h1>
+    <h3>Here are our groceries:</h3>
+    <c:forEach var="item" items="${items}">
+<%--        <div class="card">--%>
+<%--            <h5 class="card-header">${item.name}</h5>--%>
+<%--            <div class="card-body">--%>
+<%--                <h5 class="card-title">${item.priceInCents} cents</h5>--%>
+<%--                <a href="#" class="btn btn-primary">Add To Cart</a>--%>
+<%--            </div>--%>
+<%--        </div>--%>
+        <div class="card" style="width: 18rem;">
+            <div class="card-body">
+                <h5 class="card-title">${item.name}</h5>
+                <p class="card-text">${item.priceInCents} cents</p>
+                <a href="#" class="btn btn-primary">Add To Cart</a>
+            </div>
+        </div>
+    </c:forEach>
 </body>
 </html>
