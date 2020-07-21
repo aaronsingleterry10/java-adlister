@@ -3,6 +3,11 @@ public class Item {
     private String name;
     private int priceInCents;
 
+    public Item(String name, int priceInCents) {
+        this.name = name;
+        this.priceInCents = priceInCents;
+    }
+
     public Item(long id, String name, int priceInCents) {
         this.id = id;
         this.name = name;
