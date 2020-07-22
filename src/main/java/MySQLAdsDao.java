@@ -21,10 +21,11 @@ public class MySQLAdsDao implements Ads {
             ResultSet rs = statement.executeQuery(query);
             while (rs.next()) {
                 ads.add(new Ad(
+                        rs.getLong("id"),
                         rs.getLong("user_id"),
                         rs.getString("title"),
                         rs.getString("description")
-                        ));
+                ));
             }
         } catch (SQLException throwables) {
             throwables.printStackTrace();
@@ -33,24 +34,26 @@ public class MySQLAdsDao implements Ads {
     }
 
     @Override
-    public Long insert(Ad ad) {
+    public Long insert(Ad ad) throws SQLException {
         long lastInsertedId = 0;
         String query = String.format(
                 "INSERT INTO ads (user_id, title, description) VALUES ('%d', '%s', '%s')",
-                ad.getId(),
+                ad.getUserId(),
                 ad.getTitle(),
                 ad.getDescription()
         );
-        try {
             Statement statement = connection.createStatement();
             statement.executeUpdate(query, Statement.RETURN_GENERATED_KEYS);
             ResultSet generateKeys = statement.getGeneratedKeys();
             if (generateKeys.next()) {
                 lastInsertedId = generateKeys.getLong(1);
             }
-        } catch (SQLException throwables) {
-            throwables.printStackTrace();
-        }
         return lastInsertedId;
+    }
+
+    public static void main(String[] args) throws SQLException {
+//        Ads adsDao = new MySQLAdsDao(new Config());
+//        Ad newAd = new Ad(2, "test title", "test description");
+//        System.out.println(adsDao.insert(newAd));
     }
 }

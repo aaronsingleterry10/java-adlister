@@ -25,5 +25,6 @@ public class CreateAdServlet extends HttpServlet {
             throwables.printStackTrace();
         }
         response.sendRedirect("/ads");
+
     }
 }
