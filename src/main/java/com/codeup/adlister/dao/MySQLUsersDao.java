@@ -23,6 +23,14 @@ public class MySQLUsersDao implements Users {
 
     @Override
     public User findByUsername(String username) {
+        try {
+            DriverManager.registerDriver(new Driver());
+            String query = "SELECT username FROM users WHERE username LIKE '" + username + "'";
+            PreparedStatement statement = connection.prepareStatement(query);
+            ResultSet rs = statement.executeQuery();
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
         return null;
     }
 
