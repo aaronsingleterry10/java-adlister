@@ -16,7 +16,7 @@
 <body>
     <h1>Would you like to register for a new account? Fill out the form below!</h1>
 
-    <form action="/register" method="post">
+    <form action="/users/register" method="post">
         <label for="username">Create username: </label>
         <input type="text" name="username" id="username">
         <label for="email">Enter email: </label>
