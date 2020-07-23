@@ -23,6 +23,7 @@
         <input type="text" name="email" id="email">
         <label for="password">Create password: </label>
         <input type="password" name="password" id="password">
+        <button>Submit</button>
     </form>
 </body>
 </html>
