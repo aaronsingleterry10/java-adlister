@@ -23,15 +23,20 @@ public class MySQLUsersDao implements Users {
 
     @Override
     public User findByUsername(String username) {
+        Config config = new Config();
+        User user = null;
         try {
             DriverManager.registerDriver(new Driver());
-            String query = "SELECT username FROM users WHERE username LIKE '" + username + "'";
+            connection = DriverManager.getConnection(config.getUrl(), config.getUser(), config.getPassword());
+            String query = String.format("SELECT * FROM users WHERE username LIKE '%s'", username);
             PreparedStatement statement = connection.prepareStatement(query);
             ResultSet rs = statement.executeQuery();
+            rs.next();
+            user = new User(rs.getLong("id"), rs.getString("username"), rs.getString("email"), rs.getString("password"));
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
-        return null;
+        return user;
     }
 
     @Override
@@ -54,10 +59,19 @@ public class MySQLUsersDao implements Users {
         return lastGeneratedId;
     }
 
-    public static void main(String[] args) {
-        User testUser = new User("test_user", "test_email", "test_password");
-        Users userDao = new MySQLUsersDao(new Config());
-        System.out.println(userDao.insert(testUser));
+    public static void main(String[] args) throws SQLException {
+//        User testUser = new User("test_user", "test_email", "test_password");
+//        Users userDao = new MySQLUsersDao(new Config());
+//        System.out.println(userDao.insert(testUser));
+        System.out.println(DaoFactory.getUsersDao().findByUsername("myUsername"));
+//        Config config = new Config();
+//        Connection connection = DriverManager.getConnection(config.getUrl(), config.getUser(), config.getPassword());
+//        DriverManager.registerDriver(new Driver());
+//        String query = "SELECT * FROM users WHERE username LIKE 'myUsername'";
+//        PreparedStatement statement = connection.prepareStatement(query);
+//        ResultSet rs = statement.executeQuery();
+//        rs.next();
+//        System.out.println(rs.getLong(1));
     }
 }
 

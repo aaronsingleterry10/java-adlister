@@ -1,6 +1,9 @@
 package com.codeup.adlister.controllers;
 
 import com.codeup.adlister.dao.Config;
+import com.codeup.adlister.dao.DaoFactory;
+import com.codeup.adlister.dao.MySQLUsersDao;
+import com.codeup.adlister.models.User;
 import com.mysql.cj.jdbc.Driver;
 
 import javax.servlet.ServletException;
@@ -22,41 +25,43 @@ public class LoginServlet extends HttpServlet {
     }
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
-        Config config = new Config();
-        try {
-            DriverManager.registerDriver(new Driver());
-            Connection connection = DriverManager.getConnection(config.getUrl(), config.getUser(), config.getPassword());
-            String username = request.getParameter("username");
-            String password = request.getParameter("password");
-            String query = "SELECT username FROM users WHERE username LIKE '" + username + "'";
-            String passwordQuery = "SELECT password FROM users WHERE password LIKE '" + password + "'";
-            PreparedStatement statement = connection.prepareStatement(query);
-            PreparedStatement statementPassword = connection.prepareStatement(passwordQuery);
+//        Config config = new Config();
+        String username = request.getParameter("username");
+        String password = request.getParameter("password");
+        User user = null;
+//        try {
+//            DriverManager.registerDriver(new Driver());
+//            Connection connection = DriverManager.getConnection(config.getUrl(), config.getUser(), config.getPassword());
 
-            ResultSet rs = statement.executeQuery();
-            ResultSet rsPassword = statementPassword.executeQuery();
+//            String query = "SELECT username FROM users WHERE username LIKE '" + username + "'";
+//            String passwordQuery = "SELECT password FROM users WHERE password LIKE '" + password + "'";
+//            PreparedStatement statement = connection.prepareStatement(query);
+//            PreparedStatement statementPassword = connection.prepareStatement(passwordQuery);
+
+//            ResultSet rs = statement.executeQuery();
+//            ResultSet rsPassword = statementPassword.executeQuery();
+        user = DaoFactory.getUsersDao().findByUsername(username);
             boolean validAttempt;
-            if (!rs.next() && !rsPassword.next()) {
+            if (!user.getPassword().equals(password)) {
                 response.sendRedirect("/login");
                 return;
             } else {
                 validAttempt = true;
             }
-        // TODO: find a record in your database that matches the submitted password
-        // TODO: make sure we find a user with that username
-        // TODO: check the submitted password against what you have in your database
+            // TODO: find a record in your database that matches the submitted password
+            // TODO: make sure we find a user with that username
+            // TODO: check the submitted password against what you have in your database
 
 
-
-        if (validAttempt) {
-            // TODO: store the logged in user object in the session, instead of just the username
-            request.getSession().setAttribute("user", username);
-            response.sendRedirect("/profile");
-        } else {
-            response.sendRedirect("/login");
-        }
-        } catch (SQLException throwables) {
-            throwables.printStackTrace();
-        }
+            if (validAttempt) {
+                // TODO: store the logged in user object in the session, instead of just the username
+                request.getSession().setAttribute("user", username);
+                response.sendRedirect("/profile");
+            } else {
+                response.sendRedirect("/login");
+            }
+//        } catch (SQLException throwables) {
+//            throwables.printStackTrace();
+//        }
     }
 }
