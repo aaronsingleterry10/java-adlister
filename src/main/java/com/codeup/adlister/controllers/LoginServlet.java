@@ -1,11 +1,15 @@
 package com.codeup.adlister.controllers;
 
+import com.codeup.adlister.dao.Config;
+import com.mysql.cj.jdbc.Driver;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.sql.*;
 
 @WebServlet(name = "controllers.LoginServlet", urlPatterns = "/login")
 public class LoginServlet extends HttpServlet {
@@ -18,13 +22,31 @@ public class LoginServlet extends HttpServlet {
     }
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
-        String username = request.getParameter("username");
-        String password = request.getParameter("password");
+        Config config = new Config();
+        try {
+            DriverManager.registerDriver(new Driver());
+            Connection connection = DriverManager.getConnection(config.getUrl(), config.getUser(), config.getPassword());
+            String username = request.getParameter("username");
+            String password = request.getParameter("password");
+            String query = "SELECT username FROM users WHERE username LIKE '" + username + "'";
+            String passwordQuery = "SELECT password FROM users WHERE password LIKE '" + password + "'";
+            PreparedStatement statement = connection.prepareStatement(query);
+            PreparedStatement statementPassword = connection.prepareStatement(passwordQuery);
 
+            ResultSet rs = statement.executeQuery();
+            ResultSet rsPassword = statementPassword.executeQuery();
+            boolean validAttempt;
+            if (!rs.next() && !rsPassword.next()) {
+                response.sendRedirect("/login");
+                return;
+            } else {
+                validAttempt = true;
+            }
         // TODO: find a record in your database that matches the submitted password
         // TODO: make sure we find a user with that username
         // TODO: check the submitted password against what you have in your database
-        boolean validAttempt = false;
+
+
 
         if (validAttempt) {
             // TODO: store the logged in user object in the session, instead of just the username
@@ -32,6 +54,9 @@ public class LoginServlet extends HttpServlet {
             response.sendRedirect("/profile");
         } else {
             response.sendRedirect("/login");
+        }
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
         }
     }
 }
