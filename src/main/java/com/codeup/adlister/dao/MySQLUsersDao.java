@@ -3,9 +3,7 @@ package com.codeup.adlister.dao;
 import com.codeup.adlister.models.User;
 import com.mysql.cj.jdbc.Driver;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.SQLException;
+import java.sql.*;
 
 public class MySQLUsersDao implements Users {
     private Connection connection;
@@ -30,6 +28,28 @@ public class MySQLUsersDao implements Users {
 
     @Override
     public Long insert(User user) {
-        return null;
+        String query = String.format("INSERT INTO users(username, email, password) VALUES ('%s', '%s', '%s')",
+                user.getUsername(),
+                user.getEmail(),
+                user.getPassword()
+        );
+        long lastGeneratedId = 0;
+        try {
+            PreparedStatement statement = connection.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
+            statement.executeUpdate();
+            ResultSet rs = statement.getGeneratedKeys();
+            rs.next();
+            lastGeneratedId = rs.getLong(1);
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+        return lastGeneratedId;
+    }
+
+    public static void main(String[] args) {
+        User testUser = new User("test_user", "test_email", "test_password");
+        Users userDao = new MySQLUsersDao(new Config());
+        System.out.println(userDao.insert(testUser));
     }
 }
+
